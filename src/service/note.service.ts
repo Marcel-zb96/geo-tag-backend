@@ -6,9 +6,6 @@ const prisma = new PrismaClient()
 export const getUserNotes = async (userId: string): Promise<NoteDTO[]> => {
     try {
         const userNotes: Note[] | null = await prisma.note.findMany({ where: { authorId: userId } })
-        if (!userNotes) {
-            throw { status: 404, message: "Notes not found" };
-        }
         return userNotes.map((note) => parseNote(note));
     } catch (error) {
         throw { status: 500, message: "Database error", details: error };
@@ -17,10 +14,7 @@ export const getUserNotes = async (userId: string): Promise<NoteDTO[]> => {
 
 export const getAllNotes = async (): Promise<NoteDTO[]> => {
     try {
-        const allNotes: Note[] | null = await prisma.note.findMany();
-        if (!allNotes) {
-            throw { status: 404, message: "Notes not found"}
-        }
+        const allNotes: Note[] = await prisma.note.findMany();
         return allNotes.map((note) => parseNote(note));
     } catch (error) {
         throw { status: 500, message: "Database error", details: error }; 

@@ -7,12 +7,15 @@ const prisma = new PrismaClient()
 
 export const getUser = async (id: string): Promise<UserDTO> => {
     try {
-        const user: User | null = await prisma.user.findUnique({ where: { id: id } });
+        const user: User | null = await prisma.user.findUnique({ where: { id } });
         if (!user) {
             throw { status: 404, message: "User not found" };
         }
         return parseUser(user);
-    } catch (error) {
+    } catch (error: any) {
+        if (error.status === 404) {
+            throw error;
+        }
         throw { status: 500, message: "Database error", details: error };
     }
 }
