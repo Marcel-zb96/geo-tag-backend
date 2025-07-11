@@ -1,4 +1,4 @@
-import { $Enums, PrismaClient, User } from "../../generated/prisma"
+import { PrismaClient, User } from "../../generated/prisma"
 import { CreateUserDTO, UserDTO } from "../types/user";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
