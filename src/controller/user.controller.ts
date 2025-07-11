@@ -9,7 +9,7 @@ import { Role } from "../../generated/prisma";
 
 const router: express.Router = express.Router();
 
-router.get('/', authenticate, authorize([Role.USER]), async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.get('/', authenticate, authorize([Role.USER, Role.ADMIN]), async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const user: UserDTO = await getUser(req.user!.id);
     res.status(200).send({success: true, user});
