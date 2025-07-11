@@ -28,8 +28,10 @@ model Note {
   createdAt DateTime @default(now())
   title     String
   content   String?
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String?
+  latitude  String
+  longitude String
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  String
 }
 
 enum Role {
