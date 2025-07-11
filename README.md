@@ -4,7 +4,7 @@
 
 ## Project Title & Description
 
-This project is a backend application built with a TypeScript.
+This project is a backend application built with TypeScript.
 
 ## Prerequisites & Dependencies
 
