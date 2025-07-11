@@ -65,7 +65,6 @@ Follow these steps to set up the project:
 
 ---
 
----
 ## SOLID Principles in This Project
 - **Single Responsibility:**  
     Each controller handles only HTTP request/response logic, while business logic is encapsulated in service layer. This separation keeps each file focused and maintainable.
