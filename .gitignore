@@ -27,7 +27,7 @@ Thumbs.db
 
 # Prisma
 .prisma/
-/src/generated/prisma
+/generated/prisma
 
 # Optional: ignore temp/test files
 tmp/
