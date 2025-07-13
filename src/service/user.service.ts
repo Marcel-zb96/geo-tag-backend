@@ -1,5 +1,5 @@
 import { PrismaClient, User } from "../../generated/prisma"
-import { CreateUserDTO, UserDTO } from "../types/user";
+import { CreateUserDTO, LoginDTO, UserDTO } from "../types/user";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -37,7 +37,10 @@ export const createUser = async (newUser: CreateUserDTO): Promise<UserDTO> => {
 }
 
 
-export const validateUser = async (email: any, password: any): Promise<{token: string, userName: string}> => {
+export const validateUser = async (userData: LoginDTO): Promise<{token: string, userName: string}> => {
+    const email: string = userData.email;
+    const password: string = userData.password;
+    
     const user = await prisma.user.findUnique({ where: { email } })
     if (!user) {
         throw { status: 401, message: "Invalid credentials" };
