@@ -28,8 +28,8 @@ model Note {
   createdAt DateTime @default(now())
   title     String
   content   String?
-  latitude  String
-  longitude String
+  latitude  Float
+  longitude Float
   author    User    @relation(fields: [authorId], references: [id])
   authorId  String
 }

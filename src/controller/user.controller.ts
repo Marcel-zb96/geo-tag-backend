@@ -4,7 +4,7 @@ import express, { NextFunction, Request, Response } from "express";
 
 import { authenticate, authorize } from "../middleware/auth";
 import { createUser, getUser, validateUser } from "../service/user.service";
-import { CreateUserDTO, UserDTO } from "../types/user";
+import { CreateUserDTO, LoginDTO, UserDTO } from "../types/user";
 import { Role } from "../../generated/prisma";
 
 const router: express.Router = express.Router();
@@ -34,13 +34,13 @@ router.post('/register', async (req: Request, res: Response, next: NextFunction)
 
 router.post('/login', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { email, password } = req.body;
 
-    if (!email || !password) {
+    const userData: LoginDTO = req.body;    
+    if (!userData.email || !userData.password) {
       res.status(400).send({ success: false, message: "Email and password are required" });
     }
 
-    const {token, userName} = await validateUser(email, password);
+    const {token, userName} = await validateUser(userData);
     res.status(200).send({
       success: true,
       message: "Login successful",

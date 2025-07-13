@@ -87,7 +87,7 @@ describe("user.service", () => {
             (bcrypt.compare as jest.Mock).mockResolvedValue(true);
             (jwt.sign as jest.Mock).mockReturnValue("jwt-token");
 
-            const result = await userService.validateUser("bob@mail.com", "password");
+            const result = await userService.validateUser({email: "bob@mail.com", password: "password"});
             expect(result).toEqual({ token: "jwt-token", userName: "Bob" });
             expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({ where: { email: "bob@mail.com" } });
             expect(bcrypt.compare).toHaveBeenCalledWith("password", "hashed");
@@ -101,7 +101,7 @@ describe("user.service", () => {
         it("should throw 401 if user not found", async () => {
             mockPrisma.user.findUnique.mockResolvedValue(null);
 
-            await expect(userService.validateUser("nouser@mail.com", "pass")).rejects.toMatchObject({
+            await expect(userService.validateUser({email: "nouser@mail.com", password: "pass"})).rejects.toMatchObject({
                 status: 401,
                 message: "Invalid credentials",
             });
@@ -112,7 +112,7 @@ describe("user.service", () => {
             mockPrisma.user.findUnique.mockResolvedValue(user);
             (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
-            await expect(userService.validateUser("eve@mail.com", "wrong")).rejects.toMatchObject({
+            await expect(userService.validateUser({email: "eve@mail.com", password: "wrong"})).rejects.toMatchObject({
                 status: 401,
                 message: "Invalid credentials",
             });

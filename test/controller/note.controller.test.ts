@@ -35,8 +35,8 @@ describe("note.controller", () => {
                 id: "note1",
                 title: "Test Note",
                 content: "Content",
-                latitude: "12.34",
-                longitude: "56.78",
+                latitude: 12.34,
+                longitude: 56.78,
                 createdAt: mockDate
             }];
             jest.spyOn(noteService, "getUserNotes").mockResolvedValue(mockNotes);
@@ -67,8 +67,8 @@ describe("note.controller", () => {
                 id: "note2",
                 title: "Admin Note",
                 content: "All content",
-                latitude: "10.00",
-                longitude: "20.00",
+                latitude: 10.00,
+                longitude: 20.00,
                 createdAt: new Date()
             }];
             jest.spyOn(noteService, "getAllNotes").mockResolvedValue(mockAllNotes);
@@ -99,8 +99,8 @@ describe("note.controller", () => {
             const savedNote = {
                 id: "note3",
                 ...noteInput,
-                latitude: "0.00",
-                longitude: "0.00",
+                latitude: 0.00,
+                longitude: 0.00,
                 createdAt: new Date()
             };
             jest.spyOn(noteService, "saveNote").mockResolvedValue(savedNote);
@@ -133,8 +133,8 @@ describe("note.controller", () => {
                 id: noteId,
                 title: "Updated Title",
                 content: "Existing Content",
-                latitude: "0.00",
-                longitude: "0.00",
+                latitude: 0.00,
+                longitude: 0.00,
                 createdAt: new Date()
             };
             jest.spyOn(noteService, "updateNote").mockResolvedValue(updatedNote);
@@ -166,8 +166,8 @@ describe("note.controller", () => {
                 id: noteId,
                 title: "Deleted Note",
                 content: "Deleted content",
-                latitude: "0.00",
-                longitude: "0.00",
+                latitude: 0.00,
+                longitude: 0.00,
                 createdAt: new Date()
             };
             jest.spyOn(noteService, "deleteNote").mockResolvedValue(deletedNote);
