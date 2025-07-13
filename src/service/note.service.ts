@@ -1,4 +1,4 @@
-import { Note, PrismaClient } from "../../generated/prisma";
+import { Note, Prisma, PrismaClient } from "../../generated/prisma";
 import { NoteDTO, SaveNoteDTO, UpdateNoteDTO } from "../types/note";
 
 const prisma = new PrismaClient()
@@ -49,6 +49,22 @@ export const saveNote = async (userId: string, newNote: SaveNoteDTO): Promise<No
         });
 
         return parseNote(savedNote);
+    } catch (error) {
+        throw { status: 500, message: "Failed to save the note", details: error };
+    }
+}
+
+export const saveImportedNotes = async (userId: string, importedNotes: SaveNoteDTO[]): Promise<void> => {
+    try {
+        await prisma.note.createMany({
+            data: importedNotes.map((importedNote) => ({
+                title: importedNote.title,
+                content: importedNote.content,
+                latitude: importedNote.latitude,
+                longitude: importedNote.longitude,
+                authorId: userId,
+            })),
+        });
     } catch (error) {
         throw { status: 500, message: "Failed to save the note", details: error };
     }

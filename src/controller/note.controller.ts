@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { authenticate, authorize } from "../middleware/auth";
 import { Role } from "../../generated/prisma";
 import { NoteDTO, SaveNoteDTO, UpdateNoteDTO } from "../types/note";
-import { deleteNote, getAllNotes, getUserNotes, saveNote, updateNote } from "../service/note.service";
+import { deleteNote, getAllNotes, getUserNotes, saveImportedNotes, saveNote, updateNote } from "../service/note.service";
 
 const router: express.Router = express.Router();
 
@@ -33,6 +33,16 @@ router.post('/', authenticate, authorize([Role.USER, Role.ADMIN]), async (req: R
         next(error);
     }
 });
+
+router.post('/import', authenticate, authorize([Role.ADMIN]), async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const noteData: SaveNoteDTO[] = req.body;
+        await saveImportedNotes(req.user!.id, noteData);
+        res.status(201).send({ success: true });
+    } catch (error) {
+        next(error);
+    }
+})
 
 router.patch('/:id', authenticate, authorize([Role.USER, Role.ADMIN]), async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
