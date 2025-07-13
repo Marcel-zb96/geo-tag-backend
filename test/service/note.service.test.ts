@@ -29,8 +29,8 @@ describe("note.service - getUserNotes", () => {
         id: "note1",
         title: "Test title",
         content: "Test content",
-        latitude: "10",
-        longitude: "20",
+        latitude: 10,
+        longitude: 20,
         createdAt: fakeDate,
         authorId: "user1",
     };
@@ -87,8 +87,8 @@ describe("note.service - getAllNotes", () => {
         id: "note1",
         title: "Test title",
         content: "Test content",
-        latitude: "10",
-        longitude: "20",
+        latitude: 10,
+        longitude: 20,
         createdAt: fakeDate,
         authorId: "user1",
     };
@@ -143,8 +143,8 @@ describe("note.service - updateNote", () => {
         id: "note1",
         title: "Old title",
         content: "Old content",
-        latitude: "10",
-        longitude: "20",
+        latitude: 10,
+        longitude: 20,
         createdAt: fakeDate,
         authorId: "user1",
     };
@@ -216,8 +216,8 @@ describe("note.service - saveNote", () => {
     const newNote = {
         title: "New Note",
         content: "Some content",
-        latitude: "10",
-        longitude: "20",
+        latitude: 10,
+        longitude: 20,
     };
 
     afterEach(() => {
@@ -277,8 +277,8 @@ describe("note.service - deleteNote", () => {
         id: noteId,
         title: "To delete",
         content: "Delete this note",
-        latitude: "10",
-        longitude: "20",
+        latitude: 10,
+        longitude: 20,
         createdAt: fakeDate,
         authorId: "user1",
     };

@@ -133,7 +133,7 @@ describe('User Controller', () => {
             expect(res.body.token).toBe('jwt-token');
             expect(res.body.userName).toBe('testuser');
             expect(res.body.message).toBe('Login successful');
-            expect(userService.validateUser).toHaveBeenCalledWith('test@example.com', 'password123');
+            expect(userService.validateUser).toHaveBeenCalledWith({email: 'test@example.com', password: 'password123'});
         });
 
         it('should return 400 if email or password is missing', async () => {
